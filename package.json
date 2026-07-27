@@ -1,0 +1,7 @@
+{
+  "name": "picklebook-frontend",
+  "type": "module",
+  "scripts": {
+    "build": "echo 'Building...' && mkdir -p dist && cp index.html dist/"
+  }
+}
