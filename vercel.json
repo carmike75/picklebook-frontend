@@ -1,4 +1,1 @@
-{
-  "buildCommand": "mkdir -p .vercel/output/static && cp index.html .vercel/output/static/",
-  "outputDirectory": ".vercel/output/static"
-}
+{"rewrites":[{"source":"/(.*)", "destination":"/"}]}
