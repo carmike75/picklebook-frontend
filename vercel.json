@@ -1,0 +1,10 @@
+{
+  "buildCommand": "echo Building",
+  "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
