@@ -234,4 +234,4 @@ function OwnerCTA() {
       </button>
     </div>
   )
-}
+}export default App
