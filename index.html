@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Picklebook - Court Reservations</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+  <div class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4">
+      <h1 class="text-4xl font-bold">🎾 Picklebook</h1>
+      <p class="text-lg text-blue-100 mt-2">Find and book pickleball courts in Dumaguete</p>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 py-12">
+    <div id="status" class="text-gray-600 text-lg">Loading courts...</div>
+    <div id="courts" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  </div>
+
+  <script>
+    const API = 'https://picklebook-backend-production.up.railway.app';
+
+    fetch(API + '/courts')
+      .then(r => r.json())
+      .then(data => {
+        const courts = Array.isArray(data) ? data : (data.courts || []);
+        document.getElementById('status').textContent =
+          courts.length ? '' : 'No courts listed yet.';
+        document.getElementById('courts').innerHTML = courts.map(c => `
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="bg-blue-50 h-40 rounded-lg mb-4 flex items-center justify-center text-5xl">🎾</div>
+            <h3 class="text-lg font-bold text-gray-800">${c.name || 'Court'}</h3>
+            <p class="text-gray-600 text-sm mb-4">${c.location || 'Dumaguete, Philippines'}</p>
+            <div class="flex justify-between items-center">
+              <span class="text-2xl font-bold text-blue-600">₱${c.pricePerHour || '—'}/hr</span>
+              <span class="text-xs bg-green-100 text-green-800 px-3 py-1 rounded">${c.availableCourts || '?'} courts</span>
+            </div>
+          </div>
+        `).join('');
+      })
+      .catch(err => {
+        document.getElementById('status').textContent =
+          'Could not reach the backend. Check the Railway service.';
+        console.error(err);
+      });
+  </script>
+</body>
+</html>
