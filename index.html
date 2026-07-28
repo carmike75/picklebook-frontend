@@ -22,7 +22,7 @@
   <script>
     const API = 'https://picklebook-backend-production.up.railway.app';
 
-    fetch(API + '/courts')
+   fetch(API + '/api/courts')
       .then(r => r.json())
       .then(data => {
         const courts = Array.isArray(data) ? data : (data.courts || []);
